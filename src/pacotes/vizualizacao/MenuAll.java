@@ -1,0 +1,96 @@
+package pacotes.vizualizacao;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Scanner;
+
+import pacotes.controle.CriadorPrincipal;
+import pacotes.modelo.Aluno;
+import pacotes.modelo.Disciplina;
+import pacotes.modelo.Professor;
+import pacotes.modelo.Turma;
+
+public class MenuAll {
+    Scanner input = new Scanner(System.in);  
+
+    public void displayLogin() {
+        System.out.println("Olá, seja bem-vindo.");
+        System.out.println("Digite o tipo de usuário (Admin, Aluno, Prof): ");
+        String tipo = input.nextLine();
+
+        System.out.println("Insira o nome de usuário: ");
+        String nome = input.nextLine();
+
+        System.out.println("Insira sua senha: ");
+        String senha = input.nextLine();
+
+        String arquivo = switch (tipo.toLowerCase()) {
+            case "admin" -> "admin.csv";
+            case "aluno" -> "aluno.csv";
+            case "prof"  -> "professor.csv";
+            default -> null;
+        };
+
+        if (arquivo == null) {
+            System.out.println("Tipo de usuário inválido.");
+            return;
+        }
+
+        boolean autenticado = verificarCredenciais(nome, senha, arquivo);
+
+        if (autenticado) {
+            System.out.println("Login realizado com sucesso!");
+        } else {
+            System.out.println("Nome ou senha incorretos.");
+        }
+    }
+
+    private boolean verificarCredenciais(String nome, String senha, String arquivo) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(arquivo))) {
+            String linha;
+            while ((linha = reader.readLine()) != null) {
+                String[] campos = linha.split(",");
+                if (campos.length >= 3) {
+                    String nomeArquivo = campos[1];
+                    String senhaArquivo = campos[2];
+                    if (nome.equals(nomeArquivo) && senha.equals(senhaArquivo)) {
+                        return true;
+                    }
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("Erro ao ler o arquivo: " + e.getMessage());
+        }
+        return false;
+    }
+
+    public void displayCriationOptions() {
+        CriadorPrincipal criador = new CriadorPrincipal();
+
+        System.out.println("1- Criar aluno ");
+        System.out.println("2- Criar prof ");
+        System.out.println("3- Criar disciplina ");
+        System.out.println("4- Criar turma");
+
+        int resposta = input.nextInt();
+        input.nextLine(); // limpa o \n do buffer
+
+        if (resposta == 1) {
+            Aluno aluno = criador.criarAluno();
+            criador.salvarAlunoEmArquivo(aluno);
+        } 
+        else if (resposta == 2) {
+            Professor professor = criador.criarProfessor();
+            criador.salvarProfessorEmArquivo(professor);
+        } 
+        else if (resposta == 3) {
+            Disciplina disciplina = criador.criarDisciplina();
+            criador.salvarDisciplinaEmArquivo(disciplina);
+        }
+        else if(resposta == 4) {
+        	Turma turma = criador.criarTurma();
+        	criador.salvarTurmaEmArquivo(turma);
+        }
+    }
+}
