@@ -7,6 +7,7 @@ public class Aluno extends Identificação {
 	private String materiasCursadas;
 	private boolean especial;
 	
+
 	public Aluno() {
 		this.matricula = "";
 		this.cursoDeGraduacao = "";
@@ -39,4 +40,11 @@ public class Aluno extends Identificação {
 		this.especial = especial;
 	}
 	
+	public Aluno(String nome, String matricula, String cursoDeGraduacao, String materiasCursadas, boolean especial) {
+	    super.setNome(nome); // ou setNome se nome estiver em Identificação
+	    this.matricula = matricula;
+	    this.cursoDeGraduacao = cursoDeGraduacao;
+	    this.materiasCursadas = materiasCursadas;
+	    this.especial = especial;
+	}
 }

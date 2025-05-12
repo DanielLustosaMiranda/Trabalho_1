@@ -10,14 +10,12 @@ public class Main {
     	Scanner input = new Scanner(System.in);
     	MenuAll menu = new MenuAll();
     	
-    	int repeat = 0;
-    	while (repeat !=1 ) {
-        	menu.displayCriationOptions();
-        	System.out.println("Sair? ");
-        	repeat = input.nextInt();
+    	System.out.println("Login or create");
+    	int resposta = input.nextInt();
+    	
+    	if (resposta == 1) {
+    		menu.displayCriationOptions();
     	}
-
-  
     	menu.displayLogin();
     	
     }
