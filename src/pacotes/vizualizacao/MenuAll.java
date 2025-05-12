@@ -13,11 +13,6 @@ import pacotes.modelo.Turma;
 public class MenuAll extends AlunoMenu{
     Scanner input = new Scanner(System.in);
 
-    public static void main(String[] args) {
-        MenuAll menu = new MenuAll();
-        menu.displayLogin(); // Chama o login quando o sistema rodar
-    }
-
     public void displayLogin() {
         System.out.println("Olá, seja bem-vindo.");
         System.out.println("Digite o tipo de usuário (Admin, Aluno, Prof): ");
@@ -41,20 +36,21 @@ public class MenuAll extends AlunoMenu{
             }
             case "aluno" -> {
                 Aluno aluno = verificarAluno(nome, senha);
-                if (aluno != null) {
-                    System.out.println("Login realizado com sucesso!");
-                    // Chama o menu do aluno após a autenticação
+
+                boolean autenticacao = verificarCredenciais(nome, senha, "aluno.csv");
+                if (autenticacao) {
+                	System.out.println("Login realizado");
                     AlunoMenu alunoMenu = new AlunoMenu();
                     alunoMenu.exibirMenuAluno(aluno);
                 } else {
                     System.out.println("Nome ou senha incorretos.");
                 }
+
             }
             case "prof" -> {
                 boolean autenticado = verificarCredenciais(nome, senha, "professor.csv");
                 if (autenticado) {
                     System.out.println("Login realizado com sucesso!");
-                    // Aqui você pode adicionar menu do professor futuramente
                 } else {
                     System.out.println("Nome ou senha incorretos.");
                 }
@@ -127,5 +123,9 @@ public class MenuAll extends AlunoMenu{
         } else {
             System.out.println("Opção inválida.");
         }
+    }
+    
+    public void displayArquivos(String arquivo) {
+    
     }
 }

@@ -9,31 +9,15 @@ import pacotes.modelo.Disciplina;
 import pacotes.modelo.Professor;
 import pacotes.modelo.Turma;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-
 public class CriadorPrincipal {
     Scanner input = new Scanner(System.in);
-
-    // Método para obter o próximo ID baseado no arquivo CSV
-    private int getProximoId(String arquivo) {
-        int id = 1;  // Começa com o ID 1, se o arquivo estiver vazio ou não existir
-        try (BufferedReader reader = new BufferedReader(new FileReader(arquivo))) {
-            String linha;
-            while ((linha = reader.readLine()) != null) {
-                id++;  // A cada linha lida, incrementamos o ID
-            }
-            System.out.println(linha);
-        } catch (IOException e) {
-            System.out.println("Erro ao ler o arquivo: " + e.getMessage());
-        }
-        return id;
-    }
-
-    // Método para criar aluno
+    
+    int id = GeradorCodigos.getProximoId("aluno.csv");
+    
     public Aluno criarAluno() {
         Aluno aluno = new Aluno();
-        aluno.setId(getProximoId("aluno.csv"));
+        int id = GeradorCodigos.getProximoId("aluno.csv");
+        aluno.setId(id);
 
         System.out.print("Digite o nome do aluno: ");
         aluno.setNome(input.nextLine());
@@ -45,14 +29,13 @@ public class CriadorPrincipal {
         aluno.setCursoDeGraduacao(input.nextLine());
         System.out.print("Digite as matérias cursadas: ");
         aluno.setMateriasCursadas(input.nextLine());
-
+        
         return aluno;
-    }
 
-    // Método para salvar aluno no arquivo
+    }
+    
     public void salvarAlunoEmArquivo(Aluno aluno) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("aluno.csv", true))) {
-            // Salva os dados do aluno no formato CSV: id,nome,matricula,curso,materiasCursadas
+    	try (BufferedWriter writer = new BufferedWriter(new FileWriter("aluno.csv", true))) {
             writer.write(aluno.getId() + "," +
                     aluno.getNome() + "," +
                     aluno.getMatricula() + "," +
@@ -64,11 +47,12 @@ public class CriadorPrincipal {
             System.out.println("Erro ao salvar aluno no arquivo: " + e.getMessage());
         }
     }
-
-    // Método para criar professor
+    
     public Professor criarProfessor() {
+    	
         Professor prof = new Professor();
-        prof.setId(getProximoId("professor.csv"));
+        int id = GeradorCodigos.getProximoId("professor.csv");
+        prof.setId(id);
 
         System.out.print("Digite o nome do professor: ");
         prof.setNome(input.nextLine());
@@ -78,37 +62,34 @@ public class CriadorPrincipal {
         prof.setDisciplinaDada(input.nextLine());
         System.out.print("Digite a disciplina responsável: ");
         prof.setDisciplinaResponsavel(input.nextLine());
-
+        
         return prof;
     }
-
-    // Método para salvar professor no arquivo
+    
     public void salvarProfessorEmArquivo(Professor prof) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("professor.csv", true))) {
-            // Salva os dados do professor no formato CSV: id,nome,disciplinaDada,disciplinaResponsavel
+    	try (BufferedWriter writer = new BufferedWriter(new FileWriter("professor.csv", true))) {
             writer.write(prof.getId() + "," +
                     prof.getNome() + "," +
             		prof.getSenha() + "," +
                     prof.getDisciplinaDada() + "," +
                     prof.getDisciplinaResponsavel());
-            writer.newLine(); // Nova linha após gravar os dados
+            writer.newLine(); 
             System.out.println("Professor " + prof.getNome() + " salvo no arquivo.");
         } catch (IOException e) {
             System.out.println("Erro ao salvar professor no arquivo: " + e.getMessage());
         }
     }
 
-    // Método para criar disciplina
     public Disciplina criarDisciplina() {
         Disciplina disciplina = new Disciplina();
-
-        disciplina.setId(getProximoId("disciplina.csv"));
+        
+        int id = GeradorCodigos.getProximoId("disciplina.csv");
+        disciplina.setId(id);
 
         System.out.print("Digite o nome da disciplina: ");
         disciplina.setNome(input.nextLine());
         System.out.print("Digite o código da disciplina: ");
         disciplina.setCodigo(input.nextLine());
-        // Limpeza do buffer após nextInt()
         System.out.print("Digite o professor da disciplina: ");
         disciplina.setProfResponsavel(input.nextLine());
         System.out.print("Digite os pré-requisitos da disciplina: ");
@@ -117,41 +98,39 @@ public class CriadorPrincipal {
         disciplina.setCargaHoraria(input.nextLine());
         System.out.print("Digite 1 se a disciplina é presencial, 0 se não: ");
         disciplina.setPresencial(input.nextInt());
-        input.nextLine(); // Limpeza do buffer após nextInt()
+        input.nextLine(); 
         System.out.print("Digite a capacidade de alunos da disciplina: ");
         disciplina.setCapacidadeAlunos(input.nextInt());
-        input.nextLine(); // Limpeza do buffer após nextInt()
+        input.nextLine(); 
         System.out.print("Digite a sala da disciplina: ");
         disciplina.setSala(input.nextInt());
-        input.nextLine(); // Limpeza do buffer após nextInt()
+        input.nextLine();
 
         return disciplina;
     }
-
-    // Método para salvar disciplina no arquivo
-    public void salvarDisciplinaEmArquivo(Disciplina disciplina) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("disciplina.csv", true))) {
-            // Salva os dados da disciplina no formato CSV
-            writer.write(disciplina.getId() + "," +
-                    disciplina.getNome() + "," +
-                    disciplina.getCodigo() + "," +
-                    disciplina.getProfResponsavel() + "," +
-                    disciplina.getPreRequisitos() + "," +
-                    disciplina.getCargaHoraria() + "," +
-                    disciplina.getPresencial() + "," +
-                    disciplina.getCapacidadeAlunos() + "," +
-                    disciplina.getSala());
-            writer.newLine(); // Nova linha após gravar os dados
-            System.out.println("Disciplina " + disciplina.getNome() + " salva no arquivo.");
-        } catch (IOException e) {
-            System.out.println("Erro ao salvar disciplina no arquivo: " + e.getMessage());
-        }
-    }
     
+    public void salvarDisciplinaEmArquivo(Disciplina disciplina) {
+    	 try (BufferedWriter writer = new BufferedWriter(new FileWriter("disciplina.csv", true))) {
+             writer.write(disciplina.getId() + "," +
+                     disciplina.getNome() + "," +
+                     disciplina.getCodigo() + "," +
+                     disciplina.getProfResponsavel() + "," +
+                     disciplina.getPreRequisitos() + "," +
+                     disciplina.getCargaHoraria() + "," +
+                     disciplina.getPresencial() + "," +
+                     disciplina.getCapacidadeAlunos() + "," +
+                     disciplina.getSala());
+             writer.newLine(); 
+             System.out.println("Disciplina " + disciplina.getNome() + " salva no arquivo.");
+         } catch (IOException e) {
+             System.out.println("Erro ao salvar disciplina no arquivo: " + e.getMessage());
+         }
+    }
     public Turma criarTurma() {
         Turma turma = new Turma();
+        int id = GeradorCodigos.getProximoId("turma.csv");
+        turma.setId(id);
 
-        // Solicitar dados da turma
         System.out.print("Digite o semestre da turma: ");
         turma.setSemestre(input.nextLine());
 
@@ -167,46 +146,40 @@ public class CriadorPrincipal {
             turma.setPresencial(false);
         } else {
             System.out.println("Entrada inválida, considerando como não presencial.");
-            turma.setPresencial(false); // Default se entrada for inválida
+            turma.setPresencial(false); 
         }
         
-
         System.out.print("Digite o horário da turma: ");
         turma.setHorario(input.nextLine());
 
         System.out.print("Digite a capacidade máxima de alunos da turma: ");
         turma.setCapacidadeMaxima(input.nextInt());
-        input.nextLine();  // Consumir a nova linha pendente após nextInt()
+        input.nextLine();  
 
         System.out.print("Digite o nome do professor responsável pela turma: ");
         turma.setProfessorResponsavel(input.nextLine());
 
         System.out.print("Digite o código da disciplina da turma: ");
         turma.setCodigoDisciplina(input.nextLine());
-
-        // Gerar ID para a turma (assumindo que você tenha um método para isso)
-        turma.setId(getProximoId("turma.csv"));
-
         return turma;
     }
     
     public void salvarTurmaEmArquivo(Turma turma) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("turma.csv", true))) {
-            // Salva os dados da turma no formato CSV: id, semestre, formaDeAvaliacao, presencial, sala, horario, capacidadeMaxima, professorResponsavel, codigoDisciplina
+    	try (BufferedWriter writer = new BufferedWriter(new FileWriter("turma.csv", true))) {
             writer.write(turma.getId() + "," + 
-                         turma.getSemestre() + "," + 
-                         turma.getFormaDeAvaliacao() + "," + 
-                         turma.isPresencial() + "," + 
-                         turma.getSala() + "," + 
-                         turma.getHorario() + "," + 
-                         turma.getCapacidadeMaxima() + "," + 
-                         turma.getProfessorResponsavel() + "," + 
-                         turma.getCodigoDisciplina());
-            writer.newLine(); // Nova linha após gravar os dados
-            System.out.println("Turma " + turma.getCodigoDisciplina() + " salva no arquivo.");
-        } catch (IOException e) {
-            System.out.println("Erro ao salvar turma no arquivo: " + e.getMessage());
-        }
+                    turma.getSemestre() + "," + 
+                    turma.getFormaDeAvaliacao() + "," + 
+                    turma.isPresencial() + "," + 
+                    turma.getSala() + "," + 
+                    turma.getHorario() + "," + 
+                    turma.getCapacidadeMaxima() + "," + 
+                    turma.getProfessorResponsavel() + "," + 
+                    turma.getCodigoDisciplina());
+            writer.newLine(); 
+       		System.out.println("Turma " + turma.getCodigoDisciplina() + " salva no arquivo.");
+       } catch (IOException e) {
+    	   System.out.println("Erro ao salvar turma no arquivo: " + e.getMessage());
+       }
     }
-
+    
 }

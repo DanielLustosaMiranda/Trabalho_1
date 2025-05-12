@@ -1,5 +1,5 @@
 package pacotes.controle;
-
+import pacotes.controle.*;
 import java.io.*;
 import java.util.Scanner;
 
@@ -7,37 +7,17 @@ import pacotes.modelo.Aluno;
 
 public class AlunoControle {
     Scanner input = new Scanner(System.in);
-    
+    DisciplinaControle disciplinaControle = new DisciplinaControle();
+    		
     public void matricularDisciplina(Aluno aluno) {
-        // Listar turmas disponíveis
+
         System.out.println("Escolha uma disciplina para matricular:");
-        listarTurmasDisponiveis();
+        disciplinaControle.imprimirTurmas();
         
-        // Solicitar a escolha da disciplina
+
         System.out.print("Digite o código da disciplina que você deseja matricular: ");
         String codigoDisciplina = input.nextLine();
 
-        // Verificar se a disciplina existe e se a turma tem vagas
-        Turma turma = encontrarTurma(codigoDisciplina);
-        
-        if (turma == null) {
-            System.out.println("Disciplina não encontrada.");
-            return;
-        }
-
-        // Verificar se a turma tem vagas
-        if (turma.getCapacidadeMaxima() > turma.getNumeroAlunosMatriculados()) {
-            // Adicionar aluno à disciplina
-            aluno.setMateriasCursadas(aluno.getMateriasCursadas() + ", " + codigoDisciplina);
-            turma.matricularAluno(); // Aumenta o número de alunos matriculados
-
-            // Atualizar os arquivos
-            atualizarAlunoEmArquivo(aluno);
-            atualizarTurmaEmArquivo(turma);
-            System.out.println("Aluno matriculado com sucesso na disciplina " + codigoDisciplina);
-        } else {
-            System.out.println("Não há vagas disponíveis nesta turma.");
-        }
     }
 
     // Método para trancar uma disciplina
@@ -51,8 +31,6 @@ public class AlunoControle {
         if (opcao == 1) {
             System.out.print("Qual disciplina você deseja trancar? ");
             String disciplina = input.nextLine();
-            // Aqui você pode implementar a lógica de trancar a disciplina
-            // Exemplo: remover a disciplina da lista de matérias cursadas
             aluno.setMateriasCursadas(aluno.getMateriasCursadas().replace(", " + disciplina, ""));
             System.out.println("Disciplina " + disciplina + " trancada com sucesso!");
         } else if (opcao == 2) {

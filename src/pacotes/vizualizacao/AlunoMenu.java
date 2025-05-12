@@ -1,9 +1,7 @@
 package pacotes.vizualizacao;
-
 import java.util.Scanner;
-
-import pacotes.controle.AlunoControle;
-import pacotes.modelo.Aluno;
+import pacotes.controle.*;
+import pacotes.modelo.*;
 
 public class AlunoMenu {
     private Scanner input = new Scanner(System.in);
@@ -12,7 +10,7 @@ public class AlunoMenu {
     public void exibirMenuAluno(Aluno aluno) {
         boolean sair = false;
         while (!sair) {
-            System.out.println("\nOpções de Aluno:");
+            System.out.println("Opções de Aluno:");
             System.out.println("1 - Matricular disciplina");
             System.out.println("2 - Trancar disciplina ou semestre");
             System.out.println("3 - Sair");
@@ -37,4 +35,6 @@ public class AlunoMenu {
             }
         }
     }
+    
+
 }
