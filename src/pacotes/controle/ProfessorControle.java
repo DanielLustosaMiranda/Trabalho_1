@@ -1,98 +1,47 @@
 package pacotes.controle;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Scanner;
+
+import pacotes.modelo.Disciplina;
 import pacotes.modelo.Professor;
-import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
 
 public class ProfessorControle {
 
-    // Lista de professores, que seria carregada a partir de um arquivo CSV
-    private List<Professor> professores;
+        public static Professor criarProfessor() {
+        
+        Scanner input = new Scanner(System.in);
+        Professor professor = new Professor();
 
-    public ProfessorControle() {
-        professores = new ArrayList<>();
-        carregarProfessores();
-    }
+        System.out.print("Nome do professor: ");
+        professor.setNome(input.nextLine());
 
-    // Carregar professores a partir de um arquivo
-    private void carregarProfessores() {
-        try (BufferedReader reader = new BufferedReader(new FileReader("professor.csv"))) {
-            String linha;
-            while ((linha = reader.readLine()) != null) {
-                String[] campos = linha.split(",");
-                Professor professor = new Professor();
-                professor.setId(Integer.parseInt(campos[0]));
-                professor.setNome(campos[1]);
-                professor.setSenha(campos[2]);
-                professor.setDisciplinaDada(campos[3]);
-                professor.setDisciplinaResponsavel(campos[4]);
-                
-                professores.add(professor);
-            }
-        } catch (IOException e) {
-            System.out.println("Erro ao carregar professores: " + e.getMessage());
+        System.out.print("Nome da disciplina do professor (ou deixe vazio para nenhuma): ");
+        String nomeDisciplina = input.nextLine();
+        if (!nomeDisciplina.isEmpty()) {
+            Disciplina disciplina = new Disciplina();
+            disciplina.setNome(nomeDisciplina);
+            professor.setDisciplina(disciplina);
         }
+
+        return professor;
     }
 
-    // Método para adicionar um professor
-    public void adicionarProfessor(Professor professor) {
-        professores.add(professor);
-        salvarProfessorEmArquivo(professor);
-    }
-
-    // Método para remover um professor
-    public void removerProfessor(int id) {
-        professores.removeIf(professor -> professor.getId() == id);
-        atualizarProfessoresNoArquivo();
-    }
-
-    // Método para buscar um professor pelo ID
-    public Professor buscarProfessorPorId(int id) {
-        for (Professor professor : professores) {
-            if (professor.getId() == id) {
-                return professor;
-            }
-        }
-        return null;
-    }
-
-    // Método para listar todos os professores
-    public void listarProfessores() {
-        for (Professor professor : professores) {
-            System.out.println("ID: " + professor.getId() + " | Nome: " + professor.getNome() + " | Disciplina dada: " + professor.getDisciplinaDada());
-        }
-    }
-
-    // Método para salvar um professor no arquivo
-    private void salvarProfessorEmArquivo(Professor professor) {
+    public static void salvarProfessorEmArquivo(Professor professor) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("professor.csv", true))) {
-            writer.write(professor.getId() + "," +
-                    professor.getNome() + "," +
-                    professor.getSenha() + "," +
-                    professor.getDisciplinaDada() + "," +
-                    professor.getDisciplinaResponsavel());
+            String linha = professor.getId() + "," +
+                           professor.getNome() + "," +
+                           (professor.getDisciplina() != null ? professor.getDisciplina().getNome() : "") + "," +
+                           (professor.getTurma() != null ? professor.getTurma().getId() : "");
+
+            writer.write(linha);
             writer.newLine();
+
             System.out.println("Professor " + professor.getNome() + " salvo no arquivo.");
         } catch (IOException e) {
             System.out.println("Erro ao salvar professor no arquivo: " + e.getMessage());
-        }
-    }
-
-    // Método para atualizar os professores no arquivo
-    private void atualizarProfessoresNoArquivo() {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("professor.csv"))) {
-            for (Professor professor : professores) {
-                writer.write(professor.getId() + "," +
-                        professor.getNome() + "," +
-                        professor.getSenha() + "," +
-                        professor.getDisciplinaDada() + "," +
-                        professor.getDisciplinaResponsavel());
-                writer.newLine();
-            }
-            System.out.println("Professores atualizados no arquivo.");
-        } catch (IOException e) {
-            System.out.println("Erro ao atualizar professores no arquivo: " + e.getMessage());
         }
     }
 }

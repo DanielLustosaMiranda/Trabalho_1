@@ -1,40 +1,64 @@
-# OO T06 - 2025.1 - UnB
+Sistema Acadêmico - FCTE
+Descrição do Projeto
 
-Este repositório contém materiais da disciplina **Orientação a Objetos (OO)** do curso de Engenharia de Software da **Universidade de Brasília (UnB)**, ministrada pelo professor **Lucas Boaventura** no semestre **2025.1**.
+Desenvolvimento de um sistema acadêmico para gerenciar alunos, disciplinas, professores, turmas, avaliações e frequência, utilizando os conceitos de orientação a objetos (herança, polimorfismo e encapsulamento) e persistência de dados em arquivos.
 
-## 📌 Conteúdo
+O enunciado do trabalho pode ser encontrado aqui:
 
-Aqui, os alunos encontrarão:
+    Trabalho 1 - Sistema Acadêmico
 
-- 📑 [**Plano de Ensino** da disciplina](./plano-de-ensino/Plano%20de%20Ensino%20OO%20-%20Turma%2006.pdf)
-- 📂 [**Slides das Aulas Teóricas**](./slides/)
-- 💻 [**Códigos de Exemplos** abordados em sala](./codigos/)
-- 🛠️ [**Preparando o ambiente** para desenvolvimento](./preparando-o-ambiente/preparando-o-ambiente.md)
-- 📝 [**Listas de Exercícios e Trabalhos**](./listas/lista_p1.md)
+Dados do Aluno
 
-## 📜 Sobre a Disciplina
+    Nome completo: [Preencher aqui]
+    Matrícula: [Preencher aqui]
+    Curso: [Preencher aqui]
+    Turma: [Preencher aqui]
 
-A disciplina de **Orientação a Objetos** introduz conceitos de modelagem e implementação de sistemas baseados no paradigma orientado a objetos, utilizando Java e Python, além de finalizar com a construção de um projeto web simples com o framework Bottle.
+Instruções para Compilação e Execução
 
-## 📂 Organização do Repositório
+    Compilação:
+    [Descrever aqui como compilar o projeto. Exemplo: javac Main.java ou o script usado]
 
-A estrutura do repositório será organizada da seguinte forma:
-```
-OO-T06_2025.1_UnB_FCTE/
-│-- plano-de-ensino/
-│   ├── Plano_de_Ensino_APC_2025_01_T12.pdf
-│-- preparando-o-ambiente/
-│   ├── preparando-o-ambiente.pdf
-│-- slides/
-│   ├── aula_01_intro.pdf
-│   ├── aula_02_java.pdf
-│-- codigos/
-│   ├── ...
-```
+    Execução:
+    [Descrever aqui como executar o projeto. Exemplo: java Main ou o script usado]
 
-## 📢 Contribuições
+    Estrutura de Pastas:
+    [Descrever aqui as principais pastas do projeto]
 
-Este repositório é destinado apenas ao compartilhamento de materiais da disciplina. Se encontrar erros ou tiver sugestões, sinta-se à vontade para abrir uma **issue** ou entrar em contato.
+    Versão do JAVA utilizada:
+    [Descrever aqui como versão do JAVA utilizada no projeto. Sugestão: java 21]
 
----
-📧 Dúvidas? Entre em contato com o professor **Lucas Boaventura** pelo email lucasxboaventura18@gmail.com com o seguinte assunto "Dúvidas OO 2025.1".
+Vídeo de Demonstração
+
+    [Inserir o link para o vídeo no YouTube/Drive aqui]
+
+Prints da Execução
+
+    Menu Principal:
+    Inserir Print 1
+
+    Cadastro de Aluno:
+    Inserir Print 2
+
+    Relatório de Frequência/Notas:
+    Inserir Print 3
+
+Principais Funcionalidades Implementadas
+
+    Cadastro, listagem, matrícula e trancamento de alunos (Normais e Especiais)
+    Cadastro de disciplinas e criação de turmas (presenciais e remotas)
+    Matrícula de alunos em turmas, respeitando vagas e pré-requisitos
+    Lançamento de notas e controle de presença
+    Cálculo de média final e verificação de aprovação/reprovação
+    Relatórios de desempenho acadêmico por aluno, turma e disciplina
+    Persistência de dados em arquivos (.txt ou .csv)
+    Tratamento de duplicidade de matrículas
+    Uso de herança, polimorfismo e encapsulamento
+
+Observações (Extras ou Dificuldades)
+
+    [Espaço para o aluno comentar qualquer funcionalidade extra que implementou, dificuldades enfrentadas, ou considerações importantes.]
+
+Contato
+
+    [Opcional: E-mail pessoal do aluno.]

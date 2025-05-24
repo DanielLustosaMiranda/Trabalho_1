@@ -1,5 +1,4 @@
-package pacotes.controle;
-
+package pacotes.criadores;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -7,11 +6,11 @@ import java.io.IOException;
 public class GeradorCodigos {
 	
     public static int getProximoId(String arquivo) {
-        int id = 1;  // Começa com o ID 1, se o arquivo estiver vazio ou não existir
+        int id = 1; 
         try (BufferedReader reader = new BufferedReader(new FileReader(arquivo))) {
             String linha;
             while ((linha = reader.readLine()) != null) {
-                id++;  // A cada linha lida, incrementamos o ID
+                id++; 
             }
             System.out.println(linha);
         } catch (IOException e) {
@@ -19,4 +18,6 @@ public class GeradorCodigos {
         }
         return id;
     }
+    
+ 
 }

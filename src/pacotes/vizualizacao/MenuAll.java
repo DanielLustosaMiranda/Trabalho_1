@@ -4,16 +4,16 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Scanner;
 
-import pacotes.controle.CriadorPrincipal;
+import pacotes.criadores.CriadorPrincipal;
 import pacotes.modelo.Aluno;
 import pacotes.modelo.Disciplina;
 import pacotes.modelo.Professor;
 import pacotes.modelo.Turma;
 
 public class MenuAll extends AlunoMenu{
-    Scanner input = new Scanner(System.in);
 
-    public void displayLogin() {
+    public static void displayLogin() {
+    	Scanner input = new Scanner(System.in);
         System.out.println("Olá, seja bem-vindo.");
         System.out.println("Digite o tipo de usuário (Admin, Aluno, Prof): ");
         String tipo = input.nextLine();
@@ -78,7 +78,7 @@ public class MenuAll extends AlunoMenu{
         return false;
     }
 
-    private Aluno verificarAluno(String nome, String senha) {
+    private  Aluno verificarAluno(String nome, String senha) {
         try (BufferedReader reader = new BufferedReader(new FileReader("aluno.csv"))) {
             String linha;
             while ((linha = reader.readLine()) != null) {
@@ -97,7 +97,8 @@ public class MenuAll extends AlunoMenu{
         return null;
     }
 
-    public void displayCriationOptions() {
+    public static void displayCriationOptions() {
+    	Scanner input = new Scanner(System.in);
         CriadorPrincipal criador = new CriadorPrincipal();
 
         System.out.println("1- Criar aluno ");
@@ -106,7 +107,7 @@ public class MenuAll extends AlunoMenu{
         System.out.println("4- Criar turma");
 
         int resposta = input.nextInt();
-        input.nextLine(); // limpa o \n do buffer
+        input.nextLine();
 
         if (resposta == 1) {
             Aluno aluno = criador.criarAluno();

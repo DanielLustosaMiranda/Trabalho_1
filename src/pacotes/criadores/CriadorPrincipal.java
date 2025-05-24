@@ -1,4 +1,4 @@
-package pacotes.controle;
+package pacotes.criadores;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -25,8 +25,6 @@ public class CriadorPrincipal {
         aluno.setSenha(input.nextLine());
         System.out.print("Digite a matrícula do aluno: ");
         aluno.setMatricula(input.nextLine());
-        System.out.print("Digite o curso de graduação: ");
-        aluno.setCursoDeGraduacao(input.nextLine());
         System.out.print("Digite as matérias cursadas: ");
         aluno.setMateriasCursadas(input.nextLine());
         
@@ -39,7 +37,6 @@ public class CriadorPrincipal {
             writer.write(aluno.getId() + "," +
                     aluno.getNome() + "," +
                     aluno.getMatricula() + "," +
-                    aluno.getCursoDeGraduacao() + "," +
                     aluno.getMateriasCursadas());
             writer.newLine();
             System.out.println("Aluno " + aluno.getNome() + " salvo no arquivo.");
@@ -59,9 +56,7 @@ public class CriadorPrincipal {
         System.out.print("Digite a senha do professor: ");
         prof.setSenha(input.nextLine());
         System.out.print("Digite a disciplina dada: ");
-        prof.setDisciplinaDada(input.nextLine());
-        System.out.print("Digite a disciplina responsável: ");
-        prof.setDisciplinaResponsavel(input.nextLine());
+
         
         return prof;
     }
@@ -70,9 +65,7 @@ public class CriadorPrincipal {
     	try (BufferedWriter writer = new BufferedWriter(new FileWriter("professor.csv", true))) {
             writer.write(prof.getId() + "," +
                     prof.getNome() + "," +
-            		prof.getSenha() + "," +
-                    prof.getDisciplinaDada() + "," +
-                    prof.getDisciplinaResponsavel());
+            		prof.getSenha();
             writer.newLine(); 
             System.out.println("Professor " + prof.getNome() + " salvo no arquivo.");
         } catch (IOException e) {
@@ -126,6 +119,7 @@ public class CriadorPrincipal {
              System.out.println("Erro ao salvar disciplina no arquivo: " + e.getMessage());
          }
     }
+    
     public Turma criarTurma() {
         Turma turma = new Turma();
         int id = GeradorCodigos.getProximoId("turma.csv");

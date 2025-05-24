@@ -1,6 +1,7 @@
 package pacotes.controle;
-import pacotes.controle.*;
-import java.io.*;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 
 import pacotes.modelo.Aluno;
@@ -8,71 +9,53 @@ import pacotes.modelo.Aluno;
 public class AlunoControle {
     Scanner input = new Scanner(System.in);
     DisciplinaControle disciplinaControle = new DisciplinaControle();
+    
+    public static Aluno criarAluno() {
+        Scanner input = new Scanner(System.in);
+
+        System.out.print("Nome do aluno: ");
+        String nome = input.nextLine();
+
+        System.out.print("Matrícula: ");
+        String matricula = input.nextLine();
+
+        System.out.print("Matérias cursadas (separadas por vírgula): ");
+        String materiasCursadas = input.nextLine();
+
+        System.out.print("Aluno especial? (true/false): ");
+        boolean especial = false;
+        while (true) {
+            String resposta = input.nextLine().trim().toLowerCase();
+            if (resposta.equals("true") || resposta.equals("false")) {
+                especial = Boolean.parseBoolean(resposta);
+                break;
+            } else {
+                System.out.print("Digite 'true' ou 'false' para especial: ");
+            }
+        }
+        return new Aluno(nome, matricula, materiasCursadas, especial);
+    }
+    
+    public static void salvarAlunoEmArquivo(Aluno aluno) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("aluno.csv", true))) {
+            writer.write(aluno.getId() + "," +
+                         aluno.getNome() + "," +
+                         aluno.getMatricula() + "," +
+                         aluno.getMateriasCursadas() + "," +
+                         aluno.getEspecial());
+            writer.newLine();
+            System.out.println("Aluno " + aluno.getNome() + " salvo no arquivo.");
+        } catch (IOException e) {
+            System.out.println("Erro ao salvar aluno no arquivo: " + e.getMessage());
+        }
+    }
     		
     public void matricularDisciplina(Aluno aluno) {
 
-        System.out.println("Escolha uma disciplina para matricular:");
-        disciplinaControle.imprimirTurmas();
-        
-
-        System.out.print("Digite o código da disciplina que você deseja matricular: ");
-        String codigoDisciplina = input.nextLine();
-
     }
 
-    // Método para trancar uma disciplina
     public void trancarDisciplina(Aluno aluno) {
-        System.out.println("1- Trancar disciplina");
-        System.out.println("2- Trancar semestre");
 
-        int opcao = input.nextInt();  // Lê a opção do usuário
-        input.nextLine();  // Limpa o buffer do scanner
-
-        if (opcao == 1) {
-            System.out.print("Qual disciplina você deseja trancar? ");
-            String disciplina = input.nextLine();
-            aluno.setMateriasCursadas(aluno.getMateriasCursadas().replace(", " + disciplina, ""));
-            System.out.println("Disciplina " + disciplina + " trancada com sucesso!");
-        } else if (opcao == 2) {
-            aluno.setMateriasCursadas("");  // Tranca o semestre inteiro
-            System.out.println("Semestre trancado.");
-        } else {
-            System.out.println("Opção inválida.");
-        }
-
-        // Atualizar aluno no arquivo após trancamento
-        atualizarAlunoEmArquivo(aluno);
     }
 
-    // Método para atualizar aluno no arquivo
-    public void atualizarAlunoEmArquivo(Aluno alunoModificado) {
-        try {
-            // Lê todas as linhas do arquivo
-            BufferedReader reader = new BufferedReader(new FileReader("aluno.txt"));
-            String linha;
-            StringBuilder conteudoArquivo = new StringBuilder();
-            while ((linha = reader.readLine()) != null) {
-                String[] dadosAluno = linha.split(";");
-                // Verifica se a matrícula é a mesma, para atualizar os dados do aluno
-                if (dadosAluno[1].equals(alunoModificado.getMatricula())) {
-                    // Substitui os dados antigos pelos novos
-                    conteudoArquivo.append(alunoModificado.getNome() + ";" + alunoModificado.getMatricula() + ";"
-                            + alunoModificado.getCursoDeGraduacao() + ";" + alunoModificado.getMateriasCursadas() + ";"
-                            + alunoModificado.getEspecial() + "\n");
-                } else {
-                    // Caso não seja o aluno que queremos atualizar, mantemos a linha igual
-                    conteudoArquivo.append(linha + "\n");
-                }
-            }
-            reader.close();
-
-            // Escreve novamente todas as linhas no arquivo (sobrescrevendo)
-            BufferedWriter writer = new BufferedWriter(new FileWriter("aluno.txt"));
-            writer.write(conteudoArquivo.toString());
-            writer.close();
-            System.out.println("Aluno atualizado no arquivo.");
-        } catch (IOException e) {
-            System.out.println("Erro ao atualizar o arquivo: " + e.getMessage());
-        }
-    }
 }
