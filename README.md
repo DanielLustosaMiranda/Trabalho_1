@@ -32,8 +32,9 @@ Instruções para Compilação e Execução
 
     Estrutura de Pastas:
 
-Trabalho 1
 ![arvore](imagens/arvore.png)
+    
+    
     Versão do JAVA utilizada:
     Java 21
 
