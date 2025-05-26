@@ -40,6 +40,7 @@ public class Main {
                     break;
                 case 3:
                 	ModoCriacao.menuCriacao();
+                	break;
                 case 0:
                     System.out.println("Encerrando");
                     return;

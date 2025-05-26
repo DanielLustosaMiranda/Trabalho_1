@@ -18,6 +18,5 @@ public class GeradorCodigos {
         }
         return id;
     }
-    
- 
+   
 }
