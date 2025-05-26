@@ -1,2 +1,6 @@
-listas-professor
-ideias
+.metadata/
+.obsidian/
+.settings/
+.classpath
+.project
+bin/
