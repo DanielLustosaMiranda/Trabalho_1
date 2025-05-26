@@ -29,51 +29,11 @@ Instruções para Compilação e Execução
     Dentro da pasta trabalho execute:
     java -cp bin pacotes.Main
 
+
     Estrutura de Pastas:
 
 Trabalho 1
-.
-├── alunos.csv
-└── src
-    └── pacotes
-        ├── controle
-        │   ├── AlunoControle.class
-        │   ├── AlunoControle.java
-        │   ├── DisciplinaControle.class
-        │   ├── DisciplinaControle.java
-        │   ├── ProfessorControle.class
-        │   ├── ProfessorControle.java
-        │   ├── TurmaControle.class
-        │   └── TurmaControle.java
-        ├── criadores
-        │   ├── GeradorCodigos.class
-        │   └── GeradorCodigos.java
-        ├── Main.class
-        ├── Main.java
-        ├── modelo
-        │   ├── Aluno.class
-        │   ├── AlunoEspecial.class
-        │   ├── Aluno.java
-        │   ├── AlunoNormal.class
-        │   ├── Avaliacao$TipoAvaliacao.class
-        │   ├── Avaliacao.class
-        │   ├── Avaliacao.java
-        │   ├── Disciplina.class
-        │   ├── Disciplina.java
-        │   ├── Pessoa.class
-        │   ├── Pessoa.java
-        │   ├── Professor.class
-        │   ├── Professor.java
-        │   ├── Turma.class
-        │   └── Turma.java
-        └── modos
-            ├── ModoAluno.class
-            ├── ModoAluno.java
-            ├── ModoAvaliacao.java
-            ├── ModoCriacao.java
-            ├── ModoTurma.class
-            └── ModoTurma.java
-
+![arvore](imagens/arvore.png)
     Versão do JAVA utilizada:
     Java 21
 
