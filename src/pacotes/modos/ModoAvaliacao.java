@@ -1,10 +1,10 @@
-package modos;
+package pacotes.modos;
 
 import java.util.Scanner;
 
 public class ModoAvaliacao {
 	
-	void modoAvaliacao(){
+	public static void modoAvaliacao(){
 		
 		Scanner input = new Scanner(System.in);
 		int resposta;

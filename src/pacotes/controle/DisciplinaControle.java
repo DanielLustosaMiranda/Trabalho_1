@@ -7,71 +7,51 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
+import pacotes.criadores.GeradorCodigos;
 import pacotes.modelo.Disciplina;
 
 public class DisciplinaControle {
 
-    public static Disciplina criarDisciplina() {
-    	Scanner input = new Scanner(System.in);
-        System.out.print("Nome da disciplina: ");
-        String nome = input.nextLine();
+	public static Disciplina criarDisciplina() {
+	    Scanner input = new Scanner(System.in);
 
-        System.out.print("Código da disciplina: ");
-        String codigo = input.nextLine();
+	    System.out.print("Nome da disciplina: ");
+	    String nome = input.nextLine().trim();
 
-        System.out.print("Carga horária (ex: 60h): ");
-        String cargaHoraria = input.nextLine();
+	    System.out.print("Código da disciplina: ");
+	    String codigo = input.nextLine().trim();
 
-        System.out.print("Presencial? (true/false): ");
-        boolean presencial = false;
-        while (true) {
-            String p = input.nextLine().trim().toLowerCase();
-            if (p.equals("true") || p.equals("false")) {
-                presencial = Boolean.parseBoolean(p);
-                break;
-            } else {
-                System.out.print("Digite 'true' ou 'false': ");
-            }
-        }
+	    System.out.print("Carga horária (ex: 60h): ");
+	    String cargaHoraria = input.nextLine().trim();
 
-        System.out.print("Capacidade de alunos: ");
-        int capacidadeAlunos = 0;
-        while (true) {
-            try {
-                capacidadeAlunos = Integer.parseInt(input.nextLine().trim());
-                if (capacidadeAlunos >= 0) break;
-                else System.out.print("Digite um número inteiro positivo: ");
-            } catch (NumberFormatException e) {
-                System.out.print("Número inválido. Digite um inteiro: ");
-            }
-        }
+	    ArrayList<Disciplina> preRequisitos = new ArrayList<>();
+	    String requisito;
+	    String codigoR;
 
-        System.out.print("Número da sala: ");
-        int sala = 0;
-        while (true) {
-            try {
-                sala = Integer.parseInt(input.nextLine().trim());
-                if (sala >= 0) break;
-                else System.out.print("Digite um número inteiro positivo: ");
-            } catch (NumberFormatException e) {
-                System.out.print("Número inválido. Digite um inteiro: ");
-            }
-        }
+	    do {
+	        System.out.println("\nDigite 'fim' para terminar.");
 
-        ArrayList<Disciplina> preRequisitos = new ArrayList<>(); // vazio por enquanto, pode ser implementado depois
+	        System.out.print("Nome do Pré-requisito: ");
+	        requisito = input.nextLine().trim();
 
-        Disciplina d = new Disciplina();
-        d.setNome(nome);
-        d.setCodigo(codigo);
-        d.setCargaHoraria(cargaHoraria);
-        d.setPresencial(presencial);
-        d.setCapacidadeAlunos(capacidadeAlunos);
-        d.setSala(sala);
-        d.setPreRequisitos(preRequisitos);
-        
-        return d;
-    }
+	        if (!requisito.equalsIgnoreCase("fim")) {
+	            System.out.print("Código do Pré-requisito: ");
+	            codigoR = input.nextLine().trim();
 
+	            preRequisitos.add(new Disciplina(requisito, codigoR));
+	            System.out.println("Pré-requisito adicionado!");
+	        }
+
+	    } while (!requisito.equalsIgnoreCase("fim"));
+
+	    Disciplina d = new Disciplina();
+	    d.setNome(nome);
+	    d.setCodigo(codigo);
+	    d.setCargaHoraria(cargaHoraria);
+	    d.setPreRequisitos(preRequisitos);
+
+	    return d;
+	}
     public static void salvarEmArquivo(Disciplina d) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("disciplina.csv", true))) {
             String preReqs = "";
@@ -80,14 +60,12 @@ public class DisciplinaControle {
                         .map(Disciplina::getCodigo)
                         .collect(Collectors.joining(";"));
             }
-
-            String linha = d.getId() + "," +
+            
+            int id = GeradorCodigos.getProximoId("disciplina.csv");
+            String linha =  id + "," +
                            d.getNome() + "," +
                            d.getCodigo() + "," +
                            d.getCargaHoraria() + "," +
-                           (d.isPresencial() ? "Sim" : "Não") + "," +
-                           d.getCapacidadeAlunos() + "," +
-                           d.getSala() + "," +
                            preReqs;
 
             writer.write(linha);

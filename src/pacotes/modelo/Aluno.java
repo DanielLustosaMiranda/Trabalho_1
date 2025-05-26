@@ -1,60 +1,93 @@
 package pacotes.modelo;
 
-import pacotes.criadores.GeradorCodigos;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Aluno extends Pessoa {
+
+    private String curso;
     private boolean especial;
     private Turma turma;
-    private Avaliacao avaliacao;
-    private String materiasCursadas;
+    private int materiasMatriculadas;
+    private List<String> materiasCursadas;
+    private List<Integer> notas;
 
-    public Aluno(String nome, String matricula,
-                 String materiasCursadas, boolean especial) {
-        int id = GeradorCodigos.getProximoId("alunos.csv");
-        super.setId(id);
-        super.setNome(nome);
-        super.setMatricula(matricula);
-        this.materiasCursadas = materiasCursadas;
+    public Aluno(int id, String nome, String matricula, String curso, boolean especial) {
+    	super(id, nome, matricula);
+        this.curso = curso;
         this.especial = especial;
+        this.materiasCursadas = new ArrayList<>();
     }
 
-    public boolean getEspecial() {
-        return especial;
-    }
-    public void setEspecial(boolean especial) {
-        this.especial = especial;
-    }
+    public String getCurso() {
+		return curso;
+	}
 
-    public String getMateriasCursadas() {
-        return materiasCursadas;
-    }
-    public void setMateriasCursadas(String materiasCursadas) {
-        this.materiasCursadas = materiasCursadas;
-    }
+	public void setCurso(String curso) {
+		this.curso = curso;
+	}
 
-    public Avaliacao getAvaliacao() {
-        return avaliacao;
-    }
-    public void setAvaliacao(Avaliacao avaliacao) {
-        this.avaliacao = avaliacao;
-    }
+	public boolean isEspecial() {
+		return especial;
+	}
 
-    public Turma getTurma() {
-        return turma;
-    }
-    public void setTurma(Turma turma) {
-        this.turma = turma;
+	public void setEspecial(boolean especial) {
+		this.especial = especial;
+	}
+
+	public Turma getTurma() {
+		return turma;
+	}
+
+	public void setTurma(Turma turma) {
+		this.turma = turma;
+	}
+
+	public int getMateriasMatriculadas() {
+		return materiasMatriculadas;
+	}
+
+	public void setMateriasMatriculadas(int materiasMatriculadas) {
+		this.materiasMatriculadas = materiasMatriculadas;
+	}
+
+	public List<String> getMateriasCursadas() {
+		return materiasCursadas;
+	}
+
+	public void setMateriasCursadas(List<String> materiasCursadas) {
+		this.materiasCursadas = materiasCursadas;
+	}
+	
+	public List<Integer> getNotas() {
+		return notas;
+	}
+
+	public void setNotas(List<Integer> notas) {
+		this.notas = notas;
+	}
+
+	public void adicionarMateria(String materia) {
+	    materiasCursadas.add(materia);
+	    materiasMatriculadas = materiasCursadas.size();
+	}
+
+	public void removerMateria(String materia) {
+	    materiasCursadas.remove(materia);
+	    materiasMatriculadas = materiasCursadas.size();
+	}
+
+	public String getTipo() {
+        return especial ? "Especial" : "Normal";
     }
 
     @Override
     public String toString() {
-        return "Aluno: " + super.getNome() +
-               " | Matrícula: " + super.getMatricula() +
-               " | Especial: " + (especial ? "Sim" : "Não") +
-               " | Matérias Cursadas: " + materiasCursadas +
-               " | Turma: " + (turma != null ? turma.toString() : "Nenhuma") +
-               " | Avaliação: " + (avaliacao != null ? avaliacao.toString() : "Nenhuma");
+        return "ID: " + getId() +
+               ", Nome: " + getNome() +
+               ", Matrícula: " + getMatricula() +
+               ", Curso: " + curso +
+               ", Tipo: " + getTipo() +
+               ", Materias Cursadas: " + materiasCursadas;
     }
-
-
 }

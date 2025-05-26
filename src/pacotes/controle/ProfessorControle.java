@@ -17,6 +17,9 @@ public class ProfessorControle {
 
         System.out.print("Nome do professor: ");
         professor.setNome(input.nextLine());
+        
+        System.out.println("Numero de Matricula");
+        professor.setMatricula(input.nextLine());
 
         System.out.print("Nome da disciplina do professor (ou deixe vazio para nenhuma): ");
         String nomeDisciplina = input.nextLine();
@@ -33,6 +36,7 @@ public class ProfessorControle {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("professor.csv", true))) {
             String linha = professor.getId() + "," +
                            professor.getNome() + "," +
+                           professor.getMatricula() + "," +
                            (professor.getDisciplina() != null ? professor.getDisciplina().getNome() : "") + "," +
                            (professor.getTurma() != null ? professor.getTurma().getId() : "");
 

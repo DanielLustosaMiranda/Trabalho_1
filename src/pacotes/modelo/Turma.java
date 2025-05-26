@@ -2,18 +2,16 @@ package pacotes.modelo;
 
 import java.util.ArrayList;
 
-import pacotes.criadores.GeradorCodigos;
+public class Turma extends Disciplina {
 
-public class Turma {
-	
     private int id;
     private String semestre;
     private boolean presencial;
     private String sala;
     private String horario;
     private int capacidade;
-    private ArrayList<Aluno> alunosMatriculados;  
-    private String formaDeAvaliacao;
+    private ArrayList<Aluno> alunosMatriculados;
+    private Avaliacao avaliacao;
     private String professorResponsavel;
     private String codigoDisciplina;
 
@@ -21,20 +19,19 @@ public class Turma {
         this.alunosMatriculados = new ArrayList<>();
     }
 
-    public Turma(String semestre, boolean presencial, String sala, String horario,
-            int capacidade, String formaDeAvaliacao, String professorResponsavel, String codigoDisciplina) {
-	    int id = GeradorCodigos.getProximoId("alunos.csv");
-	   this.id = id;
-	   this.semestre = semestre;
-	   this.presencial = presencial;
-	   this.sala = sala;
-	   this.horario = horario;
-	   this.capacidade = capacidade;
-	   this.formaDeAvaliacao = formaDeAvaliacao;
-	   this.professorResponsavel = professorResponsavel;
-	   this.codigoDisciplina = codigoDisciplina;
-	   this.alunosMatriculados = new ArrayList<>();
-	}
+    public Turma(String nome, String codigo, String semestre, boolean presencial, String sala, String horario,
+                 int capacidade, Avaliacao avaliacao, String professorResponsavel, String codigoDisciplina) {
+        super(nome, codigo);
+        this.semestre = semestre;
+        this.presencial = presencial;
+        this.sala = sala;
+        this.horario = horario;
+        this.capacidade = capacidade;
+        this.avaliacao = avaliacao;
+        this.professorResponsavel = professorResponsavel;
+        this.codigoDisciplina = codigoDisciplina;
+        this.alunosMatriculados = new ArrayList<>();
+    }
 
     public int getId() {
         return id;
@@ -84,12 +81,20 @@ public class Turma {
         this.capacidade = capacidade;
     }
 
-    public String getFormaDeAvaliacao() {
-        return formaDeAvaliacao;
+    public ArrayList<Aluno> getAlunosMatriculados() {
+        return alunosMatriculados;
     }
 
-    public void setFormaDeAvaliacao(String formaDeAvaliacao) {
-        this.formaDeAvaliacao = formaDeAvaliacao;
+    public void setAlunosMatriculados(ArrayList<Aluno> alunosMatriculados) {
+        this.alunosMatriculados = alunosMatriculados;
+    }
+
+    public Avaliacao getAvaliacao() {
+        return avaliacao;
+    }
+
+    public void setAvaliacao(Avaliacao avaliacao) {
+        this.avaliacao = avaliacao;
     }
 
     public String getProfessorResponsavel() {
@@ -108,14 +113,6 @@ public class Turma {
         this.codigoDisciplina = codigoDisciplina;
     }
 
-    public ArrayList<Aluno> getAlunosMatriculados() {
-        return alunosMatriculados;
-    }
-
-    public void setAlunosMatriculados(ArrayList<Aluno> alunosMatriculados) {
-        this.alunosMatriculados = alunosMatriculados;
-    }
-
     public void adicionarAluno(Aluno aluno) {
         if (alunosMatriculados.size() < capacidade) {
             alunosMatriculados.add(aluno);
@@ -127,31 +124,4 @@ public class Turma {
     public void removerAluno(Aluno aluno) {
         alunosMatriculados.remove(aluno);
     }
-    
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Turma ID: ").append(id)
-          .append(" | Semestre: ").append(semestre)
-          .append(" | Presencial: ").append(presencial ? "Sim" : "Não")
-          .append(" | Sala: ").append(sala)
-          .append(" | Horário: ").append(horario)
-          .append(" | Capacidade: ").append(capacidade)
-          .append(" | Forma de Avaliação: ").append(formaDeAvaliacao)
-          .append(" | Professor: ").append(professorResponsavel)
-          .append(" | Código Disciplina: ").append(codigoDisciplina)
-          .append("\nAlunos Matriculados (").append(alunosMatriculados.size()).append("):");
-
-        if (alunosMatriculados.isEmpty()) {
-            sb.append(" Nenhum aluno matriculado.");
-        } else {
-            for (Aluno aluno : alunosMatriculados) {
-                sb.append("\n- ").append(aluno.getNome())
-                  .append(" (").append(aluno.getMatricula()).append(")");
-            }
-        }
-
-        return sb.toString();
-    }
-
 }

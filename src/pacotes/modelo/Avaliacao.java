@@ -1,6 +1,7 @@
 package pacotes.modelo;
 
 public class Avaliacao {
+	
     public enum TipoAvaliacao {
         SIMPLES, PONDERADA
     }
@@ -10,11 +11,22 @@ public class Avaliacao {
     private int presencas;
     private TipoAvaliacao tipo;
 
+    public Avaliacao() {
+    	
+    }
     public Avaliacao(TipoAvaliacao tipo) {
         this.tipo = tipo;
     }
+    
+    public TipoAvaliacao getTipo() {
+		return tipo;
+	}
+    
+	public void setTipo(TipoAvaliacao tipo) {
+		this.tipo = tipo;
+	}
 
-    public void lancarNotas(double p1, double p2, double p3, double listas, double seminario) {
+	public void lancarNotas(double p1, double p2, double p3, double listas, double seminario) {
         this.p1 = p1;
         this.p2 = p2;
         this.p3 = p3;
@@ -53,4 +65,10 @@ public class Avaliacao {
         System.out.printf("Frequência: %.2f%%\n", getFrequencia());
         System.out.println("Status: " + getStatus());
     }
+    
+    @Override
+    public String toString() {
+        return tipo != null ? tipo.toString().toLowerCase() : "indefinido";
+    }
+
 }

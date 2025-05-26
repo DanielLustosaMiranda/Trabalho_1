@@ -2,61 +2,52 @@ package pacotes;
 
 import java.util.Scanner;
 
-import pacotes.controle.AlunoControle;
-import pacotes.controle.DisciplinaControle;
-import pacotes.controle.ProfessorControle;
-import pacotes.controle.TurmaControle;
-import pacotes.modelo.Aluno;
-import pacotes.modelo.Disciplina;
-import pacotes.modelo.Professor;
-import pacotes.modelo.Turma;
+import pacotes.modos.ModoAluno;
+import pacotes.modos.ModoCriacao;
+import pacotes.modos.ModoTurma;
 
 public class Main {
 
     public static void main(String[] args) {
-       
-    	Scanner input = new Scanner(System.in);
+
+        Scanner input = new Scanner(System.in);
 
         while (true) {
-            System.out.println("\nEscolha uma opção:");
-            System.out.println("1 - Criar Disciplina");
-            System.out.println("2 - Criar Professor");
-            System.out.println("3 - Criar Turma");
-            System.out.println("4 - Criar Aluno");
+        	
+            System.out.println("== Bem vindo ==");
+            System.out.println("1 - Modo Aluno");
+            System.out.println("2 - Modo Turma");
+            System.out.println("3 - Modo criação");
             System.out.println("0 - Sair");
             System.out.print("Opção: ");
 
-            String opcao = input.nextLine().trim();
+            String opcaoStr = input.nextLine().trim();
+            int opcao;
 
+            try {
+                opcao = Integer.parseInt(opcaoStr);
+            } catch (NumberFormatException e) {
+                System.out.println("Por favor, insira um número válido.");
+                continue;
+            }
+            
             switch (opcao) {
-                case "1":
-                    Disciplina disciplina = DisciplinaControle.criarDisciplina();
-                    DisciplinaControle.salvarEmArquivo(disciplina);
-                    System.out.println("Disciplina criada:\n" + disciplina);
+                case 1:
+                    ModoAluno.modoAluno();
                     break;
-                case "2":
-                    Professor professor = ProfessorControle.criarProfessor();
-                    ProfessorControle.salvarProfessorEmArquivo(professor);
-                    System.out.println("Professor criado:\n" + professor);
+                case 2:
+                    ModoTurma.modoTurma();
                     break;
-                case "3":
-                    Turma turma = TurmaControle.criarTurma();
-                    TurmaControle.salvarTurmaEmArquivo(turma);
-                    System.out.println("Turma criada:\n" + turma);
-                    break;
-                case "4":
-                    Aluno aluno = AlunoControle.criarAluno();
-                    AlunoControle.salvarAlunoEmArquivo(aluno);
-                    System.out.println("Aluno criado:\n" + aluno);
-                    break;
-                case "0":
-                    System.out.println("Programa encerrado.");
-                    input.close();
+                case 3:
+                	ModoCriacao.menuCriacao();
+                case 0:
+                    System.out.println("Encerrando");
                     return;
                 default:
                     System.out.println("Opção inválida. Tente novamente.");
+                    continue;
             }
+        
         }
-       
     }
 }

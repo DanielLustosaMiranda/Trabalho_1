@@ -9,24 +9,73 @@ O enunciado do trabalho pode ser encontrado aqui:
 
 Dados do Aluno
 
-    Nome completo: [Preencher aqui]
-    Matrícula: [Preencher aqui]
-    Curso: [Preencher aqui]
+    Nome completo: Daniel Lustosa Miranda
+    Matrícula: 242015808
+    Curso: Engenharias
     Turma: [Preencher aqui]
 
 Instruções para Compilação e Execução
 
     Compilação:
-    [Descrever aqui como compilar o projeto. Exemplo: javac Main.java ou o script usado]
+    Entre na pasta Trabalho_1
+    Para copilar rode os dois:
+
+    find src -name "*.java" > sources.txt
+    javac -d bin @sources.txt
+    java -cp bin pacotes.Main
+
 
     Execução:
-    [Descrever aqui como executar o projeto. Exemplo: java Main ou o script usado]
+    Dentro da pasta trabalho execute:
+    java -cp bin pacotes.Main
 
     Estrutura de Pastas:
-    [Descrever aqui as principais pastas do projeto]
+
+Trabalho 1
+.
+├── alunos.csv
+└── src
+    └── pacotes
+        ├── controle
+        │   ├── AlunoControle.class
+        │   ├── AlunoControle.java
+        │   ├── DisciplinaControle.class
+        │   ├── DisciplinaControle.java
+        │   ├── ProfessorControle.class
+        │   ├── ProfessorControle.java
+        │   ├── TurmaControle.class
+        │   └── TurmaControle.java
+        ├── criadores
+        │   ├── GeradorCodigos.class
+        │   └── GeradorCodigos.java
+        ├── Main.class
+        ├── Main.java
+        ├── modelo
+        │   ├── Aluno.class
+        │   ├── AlunoEspecial.class
+        │   ├── Aluno.java
+        │   ├── AlunoNormal.class
+        │   ├── Avaliacao$TipoAvaliacao.class
+        │   ├── Avaliacao.class
+        │   ├── Avaliacao.java
+        │   ├── Disciplina.class
+        │   ├── Disciplina.java
+        │   ├── Pessoa.class
+        │   ├── Pessoa.java
+        │   ├── Professor.class
+        │   ├── Professor.java
+        │   ├── Turma.class
+        │   └── Turma.java
+        └── modos
+            ├── ModoAluno.class
+            ├── ModoAluno.java
+            ├── ModoAvaliacao.java
+            ├── ModoCriacao.java
+            ├── ModoTurma.class
+            └── ModoTurma.java
 
     Versão do JAVA utilizada:
-    [Descrever aqui como versão do JAVA utilizada no projeto. Sugestão: java 21]
+    Java 21
 
 Vídeo de Demonstração
 
@@ -35,30 +84,29 @@ Vídeo de Demonstração
 Prints da Execução
 
     Menu Principal:
-    Inserir Print 1
+![imagen](imagens/menuPrincipal.png)
+![imagem](imagens/menuCriacao.png)
 
     Cadastro de Aluno:
-    Inserir Print 2
 
-    Relatório de Frequência/Notas:
-    Inserir Print 3
+![imagen](imagens/cadastroAluno.png)
+
+
 
 Principais Funcionalidades Implementadas
 
-    Cadastro, listagem, matrícula e trancamento de alunos (Normais e Especiais)
+    Cadastro, listagem de alunos e turmas, matrícula.
+
     Cadastro de disciplinas e criação de turmas (presenciais e remotas)
-    Matrícula de alunos em turmas, respeitando vagas e pré-requisitos
-    Lançamento de notas e controle de presença
-    Cálculo de média final e verificação de aprovação/reprovação
-    Relatórios de desempenho acadêmico por aluno, turma e disciplina
+    Matrícula de alunos em turmas,
     Persistência de dados em arquivos (.txt ou .csv)
-    Tratamento de duplicidade de matrículas
     Uso de herança, polimorfismo e encapsulamento
 
 Observações (Extras ou Dificuldades)
 
-    [Espaço para o aluno comentar qualquer funcionalidade extra que implementou, dificuldades enfrentadas, ou considerações importantes.]
+    As dificulades que tive foi em relação a sintaxe do java, implemetar as funcionalidades utilizando os arquivos e conseguir fazer com que as classes interagissem corretamente. 
+    Seria interessante ter algumas aulas para praticar mais.
 
 Contato
 
-    [Opcional: E-mail pessoal do aluno.]
+    danillusto59@gmail.com
