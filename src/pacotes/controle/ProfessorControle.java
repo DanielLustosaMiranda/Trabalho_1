@@ -5,6 +5,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
+import pacotes.criadores.GeradorCodigos;
 import pacotes.modelo.Disciplina;
 import pacotes.modelo.Professor;
 
@@ -33,8 +34,10 @@ public class ProfessorControle {
     }
 
     public static void salvarProfessorEmArquivo(Professor professor) {
+    	int id = GeradorCodigos.getProximoId("professor.csv");
+    	
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("professor.csv", true))) {
-            String linha = professor.getId() + "," +
+            String linha = id + "," +
                            professor.getNome() + "," +
                            professor.getMatricula() + "," +
                            (professor.getDisciplina() != null ? professor.getDisciplina().getNome() : "") + "," +

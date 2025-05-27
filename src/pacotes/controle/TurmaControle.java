@@ -92,9 +92,9 @@ public class TurmaControle {
     
     public static void salvarTurmaEmArquivo(Turma turma) {
     	
-    	int id = GeradorCodigos.getProximoId("turmas.csv");
+    	int id = GeradorCodigos.getProximoId("turma.csv");
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("turma:" + turma.getCodigoDisciplina()+ ".csv", true))) {
-            writer.write(id+ "," +
+            writer.write(id + "," +
                          turma.getSemestre() + "," +
                          turma.isPresencial() + "," +
                          turma.getSala() + "," +
@@ -164,7 +164,7 @@ public class TurmaControle {
         String nomeAluno = "";
 
         try {
-            java.io.File arquivoOriginal = new java.io.File("aluno.csv");
+            java.io.File arquivoOriginal = new java.io.File("alunos.csv");
             java.io.File arquivoTemp = new java.io.File("aluno_temp.csv");
 
             try (Scanner scanner = new Scanner(arquivoOriginal);
