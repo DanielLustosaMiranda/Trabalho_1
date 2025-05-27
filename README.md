@@ -39,8 +39,7 @@ Instruções para Compilação e Execução
     Java 21
 
 Vídeo de Demonstração
-
-    [Inserir o link para o vídeo no YouTube/Drive aqui]
+https://www.youtube.com/watch?v=IegIexI9daE
 
 Prints da Execução
 
